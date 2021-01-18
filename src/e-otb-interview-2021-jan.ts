@@ -1,1 +1,7 @@
-export class EOtbInterview2021Jan {}
+const scheduler: (input: string) => string[] = (input) => {
+    let result: string[] = [];
+    // TODO Implement the method
+    return result;
+}
+
+export default scheduler;
