@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "yarn jest"
+    "build": "tsc -p ./tsconfig.json --pretty",
+    "test": "jest --config ./jest.config.js"
   },
   "dependencies": {
     "@types/jest": "^26.0.20",

@@ -1,9 +1,17 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": "./",
+    "types": ["jest"],
+    "sourceMap": true,
+    "outDir": "./dist",
+    "moduleResolution": "node"
   },
   "include": [
-    "src/*.ts"
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
