@@ -9,7 +9,7 @@ describe('scheduler', () => {
 
     it('Given "a =>", The result should be a sequence consisting of a single job a.', () => {
         const input = `
-          a=>
+          a =>
         `;
         const output = scheduler(input);
         const expected = ['a'];
