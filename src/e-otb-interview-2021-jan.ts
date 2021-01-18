@@ -47,13 +47,23 @@ const topologicalSort: (input: Graph) => string[] = (input) => {
         throw new Error(`jobs can’t have circular dependencies`);
     }
 
-    const zeroInDegreeQueue = [...inDegree].filter(([_node, degree]) => degree == 0);
-
-    while(zeroInDegreeQueue.length > 0) {
-        /// TODO continue the implementation
-    }
+    // note: the following operation are not pure i.e. in-Degree Map is modified
     let result: string[] = [];
-    return result;
+    let visited = 0;
+    let zeroInDegreeEntry: [string, number];
+    while( (zeroInDegreeEntry = [...inDegree].find(([_node, degree]) => degree == 0)) != undefined) {
+        const node = zeroInDegreeEntry[0]; // key of Map Entry
+        result.unshift(node);
+        visited += 1;
+        input.edges.get(node).forEach(nextNode => {
+            inDegree.set(nextNode, inDegree.get(nextNode) - 1);
+        });
+        inDegree.delete(node);
+    }
+    if (visited == input.nodes.size) {
+        return result;
+    }
+    throw new Error(`jobs can’t have circular dependencies`);
 }
 
 const scheduler: (input: string) => string[] = (input) => {
