@@ -66,4 +66,18 @@ describe('scheduler', () => {
         `;
         expect(()=>scheduler(input)).to.throw(`jobs can’t have circular dependencies`);
     });
+
+    it ('Given "a=>b,c=>d" with result jobs can’t have unreachable dependency', () => {
+        const input = `a=>b,c=>d`;
+        expect(()=>scheduler(input)).to.throw(`jobs can’t have unreachable dependency`);
+    });
+
+    it ('Given mixed input "a=>b \\n b=> c, c=>", The result should give "cba"', () => {
+        const input = `
+            a=>b
+            b=>c, c =>`;
+        const output = scheduler(input);
+        const expected = ['c','b','a'];
+        expect(output).to.have.members(expected);
+    });
 });

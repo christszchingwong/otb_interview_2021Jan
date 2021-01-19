@@ -8,7 +8,7 @@ const parseInputAsGraph: (input: string) => Graph = (input) => {
         nodes: new Set<string>(),
         edges: new Map<string, Set<string>>()
     }
-    const nonEmptyLines = input.split(`\n`).map(line => line.trim()).filter(line => line != ``);
+    const nonEmptyLines = input.split(/\r?\n|,/).map(line => line.trim()).filter(line => line != ``);
     nonEmptyLines.forEach(line => {
         const matches = /(.*)=>(.*)/.exec(line);
         const name = matches[1].trim();
@@ -26,6 +26,10 @@ const parseInputAsGraph: (input: string) => Graph = (input) => {
 
 const checkSelfDependency: (input: Graph) => boolean = (input) => {
     return [...input.nodes].some(node => input.edges.get(node).has(node));
+}
+
+const checkUnreachableDependency: (input: Graph) => boolean = (input) => {
+    return [...input.edges].some(([_node, edges]) => [...edges].some(node => !input.nodes.has(node)));
 }
 
 // Kahn's Algorithm
@@ -76,6 +80,10 @@ const scheduler: (input: string) => string[] = (input) => {
     const hasSelfDependingTask = checkSelfDependency(graph);
     if (hasSelfDependingTask) {
         throw new Error(`jobs can't depend on themselves`);
+    }
+    const hasUnreachableTask = checkUnreachableDependency(graph);
+    if (hasUnreachableTask) {
+        throw new Error(`jobs can’t have unreachable dependency`);
     }
     // want: do a topological sort on the tasks
     // gut feeling tell us to do a depth first search,
