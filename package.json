@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "build": "tsc -p ./tsconfig.json --pretty",
-    "test": "mocha --require ts-node/register **/*.test.ts --coverage",
+    "dev": "nodemon",
+    "test": "mocha --require ts-node/register **/*.test.ts",
     "coverage": "nyc --reporter=text mocha --require ts-node/register **/*.test.ts"
   },
   "type": "module",
@@ -13,6 +14,7 @@
     "@types/mocha": "^8.2.0",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"

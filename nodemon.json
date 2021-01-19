@@ -1,0 +1,5 @@
+{
+    "ext": "ts",
+    "exec": "npm run test",
+    "legacyWatch": true
+}
