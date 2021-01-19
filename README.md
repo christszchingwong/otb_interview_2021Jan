@@ -1,5 +1,7 @@
 # otb_interview_2021Jan
 
+![Circle CI status](https://circleci.com/gh/christszchingwong/otb_interview_2021Jan.svg?style=shield)
+
 # Implementation Plan
 
 1. [x] Rush for a js version for agent to deliver asap
