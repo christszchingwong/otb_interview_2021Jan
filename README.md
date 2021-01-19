@@ -4,7 +4,7 @@
 
 1. [x] Rush for a js version for agent to deliver asap
 1. [ ] Align parser and output with clarified spec
-1. [ ] Fix ts-jest to enable step-in debugging
+1. [x] Replace `JEST` with `MOCHA` to enable step-in debugging
 1. [ ] Conduct further tests on edge cases
 1. [ ] Port the program into Ruby to learn the language
 
