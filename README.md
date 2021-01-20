@@ -37,6 +37,10 @@
 1. [x] Replace `JEST` with `MOCHA` to enable step-in debugging
 1. [x] Conduct further tests on edge cases
 1. ~~[ ] Port the program into Ruby to learn the language~~
+1. [ ] Convert the program to OOP
+   1. [ ] Interface for exceptions and IGraph
+   2. [ ] Implement a concrete graph class
+   3. [ ] Use Factory Pattern for Scheduler class
 
 ## Algorithm References
 
