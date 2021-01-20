@@ -32,7 +32,15 @@ const checkUnreachableDependency: (input: Graph) => boolean = (input) => {
     return [...input.edges].some(([_node, edges]) => [...edges].some(node => !input.nodes.has(node)));
 }
 
-// Kahn's Algorithm
+// gut feeling tell us to do a depth first search,
+// but I think wiki provide a better solution:
+// https://en.wikipedia.org/wiki/Topological_sorting
+// Implementing `Kahn's Algorithm` here
+// 1. calculate in-degree of graph
+// 2. stop the algorithm if pre-condition is not satisfied
+// 3. do tree shaking by
+//     a. remove nodes that is not required by any other node one by one
+//     b. update the in-degree of graph
 const topologicalSort: (input: Graph) => string[] = (input) => {
     // construct in-degree for nodes
     const inDegree: Map<string, number> = new Map([...input.nodes].map(node => [node, 0]));
@@ -51,6 +59,7 @@ const topologicalSort: (input: Graph) => string[] = (input) => {
         throw new Error(`jobs can’t have circular dependencies`);
     }
 
+    // tree shaking
     // note: the following operation are not pure i.e. in-Degree Map is modified
     let result: string[] = [];
     let visited = 0;
@@ -81,14 +90,14 @@ const scheduler: (input: string) => string[] = (input) => {
     if (hasSelfDependingTask) {
         throw new Error(`jobs can't depend on themselves`);
     }
+
+    // check existence of unreachable node
     const hasUnreachableTask = checkUnreachableDependency(graph);
     if (hasUnreachableTask) {
         throw new Error(`jobs can’t have unreachable dependency`);
     }
-    // want: do a topological sort on the tasks
-    // gut feeling tell us to do a depth first search,
-    // but I think wiki provide a better solution:
-    // https://en.wikipedia.org/wiki/Topological_sorting
+
+    // key method : sort topologically
     const topologicalSortedTasks = topologicalSort(graph);
 
     return topologicalSortedTasks;
