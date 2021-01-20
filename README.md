@@ -27,6 +27,9 @@
 5. Follow up : review the implementation with QA / product owner to check any discrepancies (fix if any).
 
 
+## Entry Point
+`src/e-otb-interview-2021-jan.ts`
+
 ## Implementation Plan
 
 1. [x] Rush for a js version for agent to deliver asap
