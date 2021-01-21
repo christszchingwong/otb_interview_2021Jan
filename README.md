@@ -28,7 +28,7 @@
 
 
 ## Entry Point
-`src/e-otb-interview-2021-jan.ts`
+`src/JobScheduler.ts`
 
 ## Implementation Plan
 
@@ -37,6 +37,10 @@
 1. [x] Replace `JEST` with `MOCHA` to enable step-in debugging
 1. [x] Conduct further tests on edge cases
 1. ~~[ ] Port the program into Ruby to learn the language~~
+1. [x] Convert the program to OOP
+   1. [x] Interface for exceptions and IGraph
+   2. [x] Implement a concrete graph class
+   3. [x] Use Factory Pattern for Scheduler class
 
 ## Algorithm References
 
