@@ -1,4 +1,4 @@
-import JobError from './lib/GraphError';
+import JobError from './lib/JobError';
 
 export default class Job {
     public readonly name: string;

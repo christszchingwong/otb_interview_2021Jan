@@ -1,5 +1,5 @@
-import GraphError from './lib/GraphError';
-import { IDirectedGraph } from './lib/Interfaces';
+import GraphError from './GraphError';
+import { IDirectedGraph } from './Interfaces';
 
 export class DirectedGraph<T> implements IDirectedGraph<T> {
     public readonly nodes: Set<T>;
@@ -56,6 +56,9 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
     //     b. update the in-degree of graph
     sort() {
         // preliminary check
+
+        // return empty array as sorted array
+        if (this.nodes.size === 0) return [];
         // DAG has at least one node with in-degree of 0 and at least one node with out-degree of 0
         const {inDegree, outDegree} = this.calculateNodeDegrees();
         const hasNodeWithZeroInDegree = [...inDegree].some(([_node, degree]) => degree === 0);

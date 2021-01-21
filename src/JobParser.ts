@@ -1,9 +1,9 @@
-import Parser from './lib/Parser';
 import Job from './Job';
+import { IParser } from './lib/Interfaces';
 import ParserError from './lib/ParserError';
 
-export default class JobParser extends Parser<Job> {
-    static Parse(input: string): Job[] {
+export default class JobParser implements IParser<Job> {
+    Parse(input: string): Job[] {
         const nonEmptyLines = input.split(/\r?\n|,/).map(line => line.trim()).filter(line => line !== ``);
         const jobs = new Map<string, Set<string>>();
         nonEmptyLines.forEach(line => {
