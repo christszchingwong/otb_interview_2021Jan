@@ -1,7 +1,8 @@
 import { DirectedGraph } from './DirectedGraph';
-import Scheduler from './lib/Scheduler';
 import Job from './Job';
 import JobParser from './JobParser';
+import JobError from './lib/GraphError';
+import Scheduler from './lib/Scheduler';
 
 export default class JobScheduler extends Scheduler {
     private constructor() { super() };
@@ -22,7 +23,7 @@ export default class JobScheduler extends Scheduler {
                     }
                     allJobDependencies.get(dependedJob).add(dependingJob);
                 } else {
-                    throw new Error(`jobs can’t depend on a non-existing job`);
+                    throw new JobError(`jobs can’t depend on a non-existing job`);
                 }
             });
         });
@@ -39,7 +40,7 @@ export default class JobScheduler extends Scheduler {
         // it is explicitly asked by the document to separate it out
         // (also means a slightly better performance)
         if (graph.hasSelfDependency()) {
-            throw new Error(`jobs can't depend on themselves`);
+            throw new JobError(`jobs can't depend on themselves`);
         }
 
         // key method : sort topologically
@@ -47,7 +48,7 @@ export default class JobScheduler extends Scheduler {
             const topologicalSortedTasks = graph.sort();
             return topologicalSortedTasks.map(job => job.name);
         } catch (ex) {
-            throw new Error(`jobs can’t have circular dependencies`);
+            throw new JobError(`jobs can’t have circular dependencies`);
         }
     }
 }

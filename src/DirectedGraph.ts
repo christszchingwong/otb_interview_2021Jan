@@ -1,3 +1,4 @@
+import GraphError from './lib/GraphError';
 import { IDirectedGraph } from './lib/Interfaces';
 
 export class DirectedGraph<T> implements IDirectedGraph<T> {
@@ -17,7 +18,7 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
 
     addEdge(fromNode: T, toNode: T) {
         if (!this.nodes.has(fromNode) || !this.nodes.has(toNode)) {
-            throw new Error(`Adding Edge for non-existing Node(s)`);
+            throw new GraphError(`Adding Edge for non-existing Node(s)`);
         }
         if (!this.edges.has(fromNode)) {
             this.edges.set(fromNode, new Set<T>());
@@ -60,7 +61,7 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
         const hasNodeWithZeroInDegree = [...inDegree].some(([_node, degree]) => degree === 0);
         const hasNodeWithZeroOutDegree = [...outDegree].some(([_node, degree]) => degree === 0);
         if (!hasNodeWithZeroInDegree || !hasNodeWithZeroOutDegree) {
-            throw new Error(`Circular Dependency detected`);
+            throw new GraphError(`Circular Dependency detected`);
         }
 
         // Kahn's Algorithm
@@ -82,6 +83,6 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
         if (visitedNodes === this.nodes.size) {
             return result;
         }
-        throw new Error(`Circular Dependency detected`);
+        throw new GraphError(`Circular Dependency detected`);
     }
 }
