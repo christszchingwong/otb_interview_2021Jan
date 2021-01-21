@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import JobScheduler from './JobScheduler';
+import JobScheduler from '../src/JobScheduler';
 
 const testNotImplemented = `Test Not Implemented`;
 
