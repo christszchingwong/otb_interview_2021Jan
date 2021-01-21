@@ -7,6 +7,7 @@
     "arrow-parens": false,
     "curly": [true, "ignore-same-line"],
     "max-line-length": false,
-    "quotemark": [true, "single", "avoid-escape", "avoid-template"]
+    "quotemark": [true, "single", "avoid-escape"],
+    "no-conditional-assignment": {"severity": "warning"}
   }
 }
