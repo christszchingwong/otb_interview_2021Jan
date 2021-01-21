@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json --pretty",
     "dev": "nodemon",
-    "test": "mocha --require ts-node/register **/*.test.ts",
+    "test": "mocha --require ts-node/register **/*.test.ts --coverage",
     "coverage": "nyc --reporter=text mocha --require ts-node/register **/*.test.ts"
   },
   "type": "module",

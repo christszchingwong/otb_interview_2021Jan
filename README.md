@@ -28,7 +28,7 @@
 
 
 ## Entry Point
-`src/e-otb-interview-2021-jan.ts`
+`src/JobScheduler.ts`
 
 ## Implementation Plan
 
