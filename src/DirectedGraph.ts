@@ -1,4 +1,4 @@
-import { IDirectedGraph } from "./Interfaces";
+import { IDirectedGraph } from './lib/Interfaces';
 
 export class DirectedGraph<T> implements IDirectedGraph<T> {
     public readonly nodes: Set<T>;
@@ -8,8 +8,8 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
     constructor(nodes: Set<T>, edges: Map<T, Set<T>>) {
         this.nodes = nodes ?? new Set<T>();
         this.edges = new Map<T, Set<T>>();
-        [...edges].forEach(([node, edges]) => {
-            [...edges].forEach(edge => {
+        [...edges].forEach(([node, edgeMap]) => {
+            [...edgeMap].forEach(edge => {
                 this.addEdge(node, edge);
             });
         })
@@ -57,19 +57,19 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
         // preliminary check
         // DAG has at least one node with in-degree of 0 and at least one node with out-degree of 0
         const {inDegree, outDegree} = this.calculateNodeDegrees();
-        const hasNodeWithZeroInDegree = [...inDegree].some(([_node, degree]) => degree == 0);
-        const hasNodeWithZeroOutDegree = [...outDegree].some(([_node, degree]) => degree == 0);
+        const hasNodeWithZeroInDegree = [...inDegree].some(([_node, degree]) => degree === 0);
+        const hasNodeWithZeroOutDegree = [...outDegree].some(([_node, degree]) => degree === 0);
         if (!hasNodeWithZeroInDegree || !hasNodeWithZeroOutDegree) {
             throw new Error(`Circular Dependency detected`);
         }
 
         // Kahn's Algorithm
-        let result : T[] = [];
+        const result : T[] = [];
         let visitedNodes = 0;
         let zeroInDegreeEntry: [T, number];
         // note: the following operation are not pure
         // tree shaking
-        while( (zeroInDegreeEntry = [...inDegree].find(([_node, degree]) => degree == 0)) != undefined) {
+        while( (zeroInDegreeEntry = [...inDegree].find(([_node, degree]) => degree === 0)) !== undefined) {
             const node = zeroInDegreeEntry[0]; // key of Map Entry
             result.push(node);
             visitedNodes += 1;
@@ -79,7 +79,7 @@ export class DirectedGraph<T> implements IDirectedGraph<T> {
             });
             inDegree.delete(node);
         }
-        if (visitedNodes == this.nodes.size) {
+        if (visitedNodes === this.nodes.size) {
             return result;
         }
         throw new Error(`Circular Dependency detected`);

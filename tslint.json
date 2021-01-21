@@ -8,6 +8,7 @@
     "curly": [true, "ignore-same-line"],
     "max-line-length": false,
     "quotemark": [true, "single", "avoid-escape"],
-    "no-conditional-assignment": {"severity": "warning"}
+    "no-conditional-assignment": {"severity": "warning"},
+    "space-before-function-paren": [true, "never"]
   }
 }

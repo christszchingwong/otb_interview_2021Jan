@@ -35,17 +35,17 @@ describe('scheduler', () => {
             f =>
         `;
         const output = JobScheduler.Schedule(input);
-        const a_position = output.findIndex(o => o=='a');
-        const b_position = output.findIndex(o => o=='b');
-        const c_position = output.findIndex(o => o=='c');
-        const d_position = output.findIndex(o => o=='d');
-        const e_position = output.findIndex(o => o=='e');
-        const f_position = output.findIndex(o => o=='f');
+        const aPosition = output.findIndex(o => o==='a');
+        const bPosition = output.findIndex(o => o==='b');
+        const cPosition = output.findIndex(o => o==='c');
+        const dPosition = output.findIndex(o => o==='d');
+        const ePosition = output.findIndex(o => o==='e');
+        const fPosition = output.findIndex(o => o==='f');
         expect(output).to.include.members(['a','b','c','d','e','f']);
-        expect(f_position).to.be.below(c_position);
-        expect(c_position).to.be.below(b_position);
-        expect(b_position).to.be.below(e_position);
-        expect(a_position).to.be.below(d_position);
+        expect(fPosition).to.be.below(cPosition);
+        expect(cPosition).to.be.below(bPosition);
+        expect(bPosition).to.be.below(ePosition);
+        expect(aPosition).to.be.below(dPosition);
     });
     it('Given " a =>,    b =>,    c => c", The result should be an error stating that jobs can’t depend on themselves.', () => {
         const input = `
@@ -106,14 +106,14 @@ describe('scheduler', () => {
         `;
         const output = JobScheduler.Schedule(input);
         expect(output).to.include.members(['a','b','c','d']);
-        const a_position = output.findIndex(o => o=='a');
-        const b_position = output.findIndex(o => o=='b');
-        const c_position = output.findIndex(o => o=='c');
-        const d_position = output.findIndex(o => o=='d');
-        expect(b_position).to.be.below(a_position);
-        expect(c_position).to.be.below(a_position);
-        expect(d_position).to.be.below(a_position);
-        expect(b_position).to.be.below(c_position);
-        expect(c_position).to.be.below(d_position);
+        const aPosition = output.findIndex(o => o==='a');
+        const bPosition = output.findIndex(o => o==='b');
+        const cPosition = output.findIndex(o => o==='c');
+        const dPosition = output.findIndex(o => o==='d');
+        expect(bPosition).to.be.below(aPosition);
+        expect(cPosition).to.be.below(aPosition);
+        expect(dPosition).to.be.below(aPosition);
+        expect(bPosition).to.be.below(cPosition);
+        expect(cPosition).to.be.below(dPosition);
     });
 });

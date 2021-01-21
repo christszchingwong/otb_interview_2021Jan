@@ -6,6 +6,7 @@
     "build": "tsc -p ./tsconfig.json --pretty",
     "dev": "nodemon",
     "test": "mocha --require ts-node/register **/*.test.ts --coverage",
+    "lint": "tslint --project . --fix",
     "coverage": "nyc --reporter=text mocha --require ts-node/register **/*.test.ts"
   },
   "type": "module",

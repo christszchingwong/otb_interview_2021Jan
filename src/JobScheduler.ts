@@ -1,7 +1,7 @@
-import { DirectedGraph } from "./DirectedGraph";
-import { Scheduler } from "./Interfaces";
-import Job from "./Job";
-import JobParser from "./JobParser";
+import { DirectedGraph } from './DirectedGraph';
+import Scheduler from './lib/Scheduler';
+import Job from './Job';
+import JobParser from './JobParser';
 
 export default class JobScheduler extends Scheduler {
     private constructor() { super() };
@@ -15,8 +15,8 @@ export default class JobScheduler extends Scheduler {
         const allJobDependencies = new Map<Job, Set<Job>>();
         jobs.forEach(dependingJob => {
             dependingJob.dependencies.forEach(dependedJobName => {
-                const dependedJob = jobs.find(job => job.name == dependedJobName);
-                if (dependedJob != undefined) {
+                const dependedJob = jobs.find(job => job.name === dependedJobName);
+                if (dependedJob !== undefined) {
                     if (!allJobDependencies.has(dependedJob)) {
                         allJobDependencies.set(dependedJob, new Set<Job>());
                     }
@@ -30,7 +30,7 @@ export default class JobScheduler extends Scheduler {
     }
     static Schedule(input: string): string[] {
         // simple case first
-        if (input.length == 0) return [];
+        if (input.length === 0) return [];
 
         const jobs = JobParser.Parse(input);
         const graph = JobScheduler.convertJobsToDirectedGraph(jobs);

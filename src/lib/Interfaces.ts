@@ -1,4 +1,4 @@
-// notice this interface is not used. 
+// notice this interface is not used.
 // It is solely created to show that you can not always inherit in programming.
 // Please check the definition on Graph and Directed Graph
 // [Graph](https://en.wikipedia.org/wiki/Graph_(topology))
@@ -11,13 +11,4 @@ export interface IGraph<T> {
 export interface IDirectedGraph<T> {
     nodes: Set<T>;
     edges: Map<T, Set<T>>;
-}
-
-
-export abstract class Parser<T> {
-    Parse: (input: string) => T[];
-}
-
-export abstract class Scheduler {
-    static Schedule: (input: string) => any[];
 }

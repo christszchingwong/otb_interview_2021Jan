@@ -1,10 +1,10 @@
-import { Parser } from "./Interfaces";
+import Parser from './lib/Parser';
 import Job from './Job';
 
 export default class JobParser extends Parser<Job> {
     static Parse(input: string): Job[] {
-        const nonEmptyLines = input.split(/\r?\n|,/).map(line => line.trim()).filter(line => line != ``);
-        let jobs = new Map<string, Set<string>>();
+        const nonEmptyLines = input.split(/\r?\n|,/).map(line => line.trim()).filter(line => line !== ``);
+        const jobs = new Map<string, Set<string>>();
         nonEmptyLines.forEach(line => {
             const matches = /^([a-zA-Z]*)\s*=>\s*([a-zA-Z]*)$/.exec(line);
             if (matches == null) {
